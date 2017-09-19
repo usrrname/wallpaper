@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Stacked Cups with Identical Crack</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+<div id="container"></div>
+<div id="canvas"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.js"></script>
+<!-- <script src="OrbitControls.js"></script> -->
+<script src="three.js"></script>
+<script src="cup.js"></script>
+<script>
+var min = 10;
+var max = 30000;
+var n = Math.floor(Math.random() * (max - min + 1) + min);
+console.log(n);
+setTimeout(function(){
+    window.location.reload(1);
+ }, n);
+
+</script>
+</body>
+</html>

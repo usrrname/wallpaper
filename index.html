@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>create Earth!</title>
+		<meta charset="utf-8">
+ 
+		<style type="text/css">
+			body {
+				background-color: #000000;
+				margin: 0px;
+				overflow: hidden;
+			}
+		</style>
+ 
+	</head>
+	<body>
+
+   <div id="container"></div>
+   
+
+
+	<script src = "three.js"></script>
+	<script>
+	//1. crucial vars
+
+	var scene, camera, light, renderer, earthObject;
+	//caps set width and height as constants for renderer
+	var WIDTH = window.innerWidth - 30, 
+	HEIGHT = window.innerHeight - 30; //
+
+	var angle = 45, 
+	aspect = WIDTH/HEIGHT,
+	near = 0.1,
+	far = 3000;
+
+	//2. set environment
+
+	var container = document.getElementById('container'); //grab reference to container in HTML
+
+	camera = new THREE.PerspectiveCamera(angle, aspect, near, far); //setup camera using vars declared before
+
+	camera.position.set(0,0,0); //set camera positions at x y and z for pointing at 3D object (earth)
+
+	scene = new THREE.Scene(); //create new scene
+	
+
+	light = new THREE.SpotLight(0xFFFFFF, 1, 0, Math.PI/2, 1); //3js' spotlight object takes pretty much the same args as camera but adds colour in hex values
+
+	light.position.set(4000, 4000, 1500);
+	light.target.position.set(1000, 3800, 1000);
+	scene.add(light); //turn lights on in your filmset!
+
+	//3. load texture, build earth
+
+	//var earthGeo = new THREE.SphereGeometry(30,40,400); //create earth shape
+	// var earthMat = new THREE.MeshPhongMaterial(
+	// 	{opacity:0.5, 
+	// 	map:mainTexture, 
+	// 	normalMap: bumpMap, 
+	// 	transparent: true, 
+	// 	specular: 0x444444});
+
+	//var earthMesh = new THREE.Mesh(earthGeo, earthMat);//mesh created, dress up with material or texture to cover it later.
+	
+var earthGeo, earthMat;
+
+	//3.5 map "earth texture" onto our earth-shaped object!
+	var loader = new THREE.TextureLoader();
+
+
+	earthObject = function(){
+	loader.load('img/earth.jpg', function ( texture, tex2 ) {
+	var texture = loader.load('img/earth.jpg');
+	tex2 = loader.load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/bump-map.jpg');
+
+  	var earthGeo = new THREE.SphereGeometry(30, 40, 400);
+  	var earthMat = new THREE.MeshBasicMaterial({
+  		map: texture, 
+  		opacity:0.3, 
+  		overdraw: 0.5});
+
+  	mesh = new THREE.Mesh(earthGeo, earthMat);
+  	mesh.position.set(-100,0,0);
+	mesh.rotation.y += 0.2;
+
+	camera.lookAt(mesh.position); //position camera around earth
+	scene.add(mesh);
+	render();
+},
+// Function called when download progresses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	},
+	// Function called when download errors
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	});
+};
+
+earthObject();
+
+	var renderer = new THREE.WebGLRenderer({antialiasing:true}); //smooth out any jagged parts
+	renderer.setSize(WIDTH, HEIGHT);
+	renderer.domElement.style.position = 'relative';
+
+	container.appendChild(renderer.domElement);
+	renderer.autoClear = false;
+	renderer.shadowMap.enabled = true;
+	
+	//Spin the earth!
+	var mouseX = 0;
+	var mouseY = 0;
+
+	function render(){
+		requestAnimationFrame();
+		var clock = new THREE.Clock();
+		var delta = clock.getDelta();
+		renderer.render(scene, camera);
+	}
+	//4.set the renderer or you wont see anything!
+
+	// function onDocumentMouseMove( event ) {
+	// 			mouseX = ( event.clientX );
+	// 			mouseY = ( event.clientY );
+	// 		}
+
+	// function render(){
+	// 	var clock = new THREE.Clock();
+	// 	var delta = clock.getDelta();
+	// }
+	//render(); //call the render function, or nothing will show up
+	//animate();
+	</script>
+
+</body>
+</html>

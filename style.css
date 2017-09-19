@@ -1,31 +1,32 @@
-body{
+body {
 margin: 0px;
 padding: 0px;
 overflow: hidden;
-background: linear-gradient(46deg, #ffb600, #02cef0, #85e8ac);
-background-size: 100% 100%;
+background: linear-gradient(46deg, #DF3325, rgba(19, 23, 24, 0.20), rgba(133, 161, 232, 0.74));
+background-color:black;
+background-size: 200% 200%;
+animation-name: slide;
+-webkit-animation: slide 8s ease infinite;
+-moz-animation: slide 8s ease infinite;
+-o-animation: slide 8s ease infinite;
+animation: slide 8s ease infinite;
 
--webkit-animation: AnimationName 11s ease infinite;
--moz-animation: AnimationName 11s ease infinite;
--o-animation: AnimationName 11s ease infinite;
-animation: AnimationName 11s ease infinite;
-
-@-webkit-keyframes AnimationName {
+@-webkit-keyframes slide {
     0%{background-position:0% 97%}
     50%{background-position:100% 4%}
     100%{background-position:0% 97%}
 }
-@-moz-keyframes AnimationName {
+@-moz-keyframes slide {
     0%{background-position:0% 97%}
     50%{background-position:100% 4%}
     100%{background-position:0% 97%}
 }
-@-o-keyframes AnimationName {
+@-o-keyframes slide {
     0%{background-position:0% 97%}
     50%{background-position:100% 4%}
     100%{background-position:0% 97%}
 }
-@keyframes AnimationName { 
+@keyframes slide { 
     0%{background-position:0% 97%}
     50%{background-position:100% 4%}
     100%{background-position:0% 97%}

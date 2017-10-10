@@ -171,7 +171,11 @@ function newCup(scene, camera){
         let loader2 = new THREE.TextureLoader();
         loader2.crossOrigin = '*';
 
-        let dotsTexture = loader2.load("img/solojazz.jpg");
+        THREE.ImageUtils.crossOrigin = '';
+        let dotsTexture = THREE.ImageUtils.loadTexture('img/solojazz.jpg');
+        
+        //let dotsTexture = loader2.load("img/solojazz.jpg");
+        
         dotsTexture.wrapS = THREE.RepeatWrapping;
         dotsTexture.wrapT = THREE.RepeatWrapping;
         dotsTexture.repeat.set(4.0, 1.50);
@@ -225,6 +229,7 @@ function newCup(scene, camera){
 
         let loader = new THREE.TextureLoader();
         loader.crossOrigin = '*';
+        img.crossOrigin = '';
         let logoTexture =  loader.load('img/red.png');
 
         logoTexture.wrapS = THREE.ClampToEdgeWrapping;

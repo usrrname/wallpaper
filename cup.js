@@ -367,4 +367,4 @@ function onWindowResize() {
     renderer.setSize( window.innerWidth, window.innerHeight );
 };
 
-zombieSoloJazz().animate();
+zombieSoloJazz().render();

@@ -171,10 +171,7 @@ function newCup(scene, camera){
         let loader2 = new THREE.TextureLoader();
         loader2.crossOrigin = '*';
 
-        THREE.ImageUtils.crossOrigin = '';
-        let dotsTexture = THREE.ImageUtils.loadTexture('img/solojazz.jpg');
-        
-        //let dotsTexture = loader2.load("img/solojazz.jpg");
+        let dotsTexture = loader2.load("img/solojazz.jpg");
         
         dotsTexture.wrapS = THREE.RepeatWrapping;
         dotsTexture.wrapT = THREE.RepeatWrapping;
@@ -227,10 +224,11 @@ function newCup(scene, camera){
             , 96, 97, 98, 99, 100, 101, 102, 103, 120, 121, 122, 123, 124, 125, 126, 127
         ];
 
-        let loader = new THREE.TextureLoader();
+       // let loader = new THREE.TextureLoader();
+        let loader = THREE.ImageUtils
         loader.crossOrigin = '*';
-        img.crossOrigin = '';
-        let logoTexture =  loader.load('img/red.png');
+        let logoTexture = loader.loadTexture('img/red.png');
+       // let logoTexture =  loader.load('img/red.png');
 
         logoTexture.wrapS = THREE.ClampToEdgeWrapping;
         logoTexture.wrapT = THREE.ClampToEdgeWrapping;
@@ -367,4 +365,4 @@ function onWindowResize() {
     renderer.setSize( window.innerWidth, window.innerHeight );
 };
 
-zombieSoloJazz().render();
+zombieSoloJazz().animate();
